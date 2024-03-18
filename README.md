@@ -1,3 +1,13 @@
+# Overview
+
+**AUGMENT EXPERIENCES WITH A SAFER, SIMPLER AND MORE PRIVATE WAY TO LOGIN**
+
+A paradigm shift in the registration and sign-in process, Affinidi Login is a game-changing solution for developers. With our revolutionary passwordless authentication solution your user's first sign-in doubles as their registration, and all the necessary data for onboarding can be requested during this streamlined sign-in/signup process. End users are in full control, ensuring that they consent to the information shared in a transparent and user-friendly manner. This streamlined approach empowers developers to create efficient user experiences with data integrity, enhanced security and privacy, and ensures compatibility with industry standards.
+
+| Passwordless Authentication | Decentralised Identity Management | Uses Latest Standards |
+|---|---|---|
+| Offers a secure and user-friendly alternative to traditional password-based authentication by eliminating passwords and thus removing the vulnerability to password-related attacks such as phishing and credential stuffing. | Leverages OID4VP to enable users to control their data and digital identity, selectively share their credentials and authenticate themselves across multiple platforms and devices without relying on a centralised identity provider. | Utilises OID4VP to enhance security of the authentication process by verifying user authenticity without the need for direct communication with the provider, reducing risk of tampering and ensuring data integrity. |
+
 # Affinidi Login Integration Guide for WIX Sites
 
 Simplify the integration of `Affinidi Login` into your Wix Sites.
@@ -101,7 +111,9 @@ Before getting started, make sure you have the following prerequisites:
 ]
 ```
 
-3. Open the Wix Secrets Manager to securely store the configs. This is more secure than pasting them into backend code.
+3. An active WIX account and a WIX site where you intend to integrate Affinidi Login with Development Mode On.
+
+4. Open the [Wix Secrets Manager](https://manage.wix.com/dashboard) to securely store the configs. This is more secure than pasting them into backend code.
 
 Create a new secret called `affinidi-sso-credentials`.
 
@@ -124,8 +136,6 @@ Sample value should look like:
 ```
 ![store-secret](./images/store-secret.png)
 
-4. An active WIX account and a WIX site where you intend to integrate Affinidi Login with Development Mode On
-
 
 ## Integration Setup
 
@@ -133,15 +143,17 @@ Sample value should look like:
 
     ![custom-signup](./images/custom-signup.png)
 
-2. Create a new blank Page with the name `Affinidi LoggedIn` and some text like `Please Wait, We are logging you in....` and hide that page from menu item. This pages acts as Loading page and does the auto-login to Wix site once user is created.
+2. Create a new blank Page with the name `Affinidi LoggedIn` and Add some text like `Please Wait, We are logging you in....` and hide that page from menu item. This pages acts as Loading page and does the auto-login to Wix site once user is created.
+
+**Note**: Make sure the URL of the above should be `/affinidi-loggedin`
 
     ![affinidi-loggedin](./images/affinidi-loggedin-page.png)
 
 3. Install the npm package `openid-client` by clicking on menu `Packages & Apps`
 
-    ![npm-package](./images/npm-package.png)
+    ![openid-client](./images/openid-client.png)
 
-4. Open `Public & Backend` menu option to write frontend & backend code
+4. Open `Public & Backend` menu option to write frontend & backend code in Wix
 
 Folder Structure should look like below, and you can copy the code for each file from [here](./wix-code)
 ```
@@ -171,15 +183,15 @@ import { getAuthUrl } from 'public/affinidi/client.js';
 import wixLocationFrontend from 'wix-location-frontend';
 
 export async function affinidiLogin_click(event) {
-    $w('#affinidiLogin').disable();
-	console.log('Affinidi Login button clicked');
-    try {
-        const url = await getAuthUrl();
-        wixLocationFrontend.to(url);
+  $w('#affinidiLogin').disable();
+	console.log('Signup Page, Affinidi Login button clicked');
+  try {
+      const url = await getAuthUrl();
+      wixLocationFrontend.to(url);
 
-    } catch (error) {
-        console.error(error);
-    }
+  } catch (error) {
+      console.error(error);
+  }
 	$w('#affinidiLogin').enable();
 }
 ```
@@ -198,15 +210,15 @@ import { getAuthUrl } from 'public/affinidi/client.js';
 import wixLocationFrontend from 'wix-location-frontend';
 
 export async function affinidiLogin2_click(event) {
-    $w('#affinidiLogin2').disable();
-	console.log('Affinidi Login button clicked');
-    try {
-        const url = await getAuthUrl();
-        wixLocationFrontend.to(url);
+  $w('#affinidiLogin2').disable();
+	console.log('Login Page, Affinidi Login button clicked');
+  try {
+      const url = await getAuthUrl();
+      wixLocationFrontend.to(url);
 
-    } catch (error) {
-        console.error(error);
-    }
+  } catch (error) {
+      console.error(error);
+  }
 	$w('#affinidiLogin2').enable();
 }
 ```
@@ -235,15 +247,15 @@ $w.onReady(function () {
 });
 
 export async function affinidiLoginMain_click(event) {
-    $w('#affinidiLoginMain').disable();
-	console.log('Affinidi Login button clicked');
-    try {
-        const url = await getAuthUrl();
-        wixLocationFrontend.to(url);
+  $w('#affinidiLoginMain').disable();
+	console.log('Header, Affinidi Login button clicked');
+  try {
+      const url = await getAuthUrl();
+      wixLocationFrontend.to(url);
 
-    } catch (error) {
-        console.error(error);
-    }
+  } catch (error) {
+      console.error(error);
+  }
 	$w('#affinidiLoginMain').enable();
 }
 ```
@@ -256,26 +268,31 @@ import wixUsers from 'wix-users';
 import wixLocationFrontend from 'wix-location-frontend';
 
 $w.onReady(function () {
-	console.log('logged in page initiated');
-	applyToken(true).then(() => {
+	console.log('Affinidi Logged-in page initiated');
+	applyToken().then(() => {
         // Gets user email
         wixUsers.currentUser.getEmail().then((email) => {
             console.log('user logged in', email);
         });
-		wixLocationFrontend.to('/account/my-account');		
+		    wixLocationFrontend.to('/account/my-account');		
     }).catch(error => {
-		console.error('error ', error);
-		wixLocationFrontend.to('/');
-	});
+		  console.error('error ', error);
+		  wixLocationFrontend.to('/');
+	  });
 
 });
 ```
 ![affinidi-loggedin-page2](./images/affinidi-loggedin-page2.png)
 
 8. Save the changes and publish it, Open site URL and click on `Affinidi Login` button under Signup/Login Page/Home Page
+
+Login Page
 ![login](./images/login.png)
+Signup Page
 ![signup](./images/signup.png)
+Consent Screen
 ![consent-screen.](./images/consent-screen.png)
+Accounts page post login Success
 ![login-success](./images/login-success.png)
 
 
