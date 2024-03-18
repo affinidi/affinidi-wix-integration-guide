@@ -26,7 +26,7 @@ Before getting started, make sure you have the following prerequisites:
 
 1. Install [Affinidi Vault](https://docs.affinidi.com/labs/affinidi-login-basic/#before-you-begin-i-classfa-solid-fa-stari) to discover, collect, store, share, and monetise your data with consent.
 
-2. Create Login configuration using the link [here](https://docs.affinidi.com/docs/affinidi-login/login-configuration/#using-affinidi-portal) by giving 
+2. Create Login configuration using the link [here](https://docs.affinidi.com/docs/affinidi-login/login-configuration/#using-affinidi-portal) with below details: 
     - Name as `Wix Site` 
     - redirect-uri as `https://{WIX_SITE}/_functions/getAuthCallback` e.g. `https://parameshk9.wixsite.com/paramesh-affinidi/_functions/getAuthCallback`
     - Authentication Mode as `None`, This enables PKCE flow
@@ -147,9 +147,9 @@ Sample value should look like:
 
 **Note**: Make sure the URL of the above should be `/affinidi-loggedin`
 
-    ![affinidi-loggedin](./images/affinidi-loggedin-page.png)
+  ![affinidi-loggedin](./images/affinidi-loggedin-page.png)
 
-3. Install the npm package `openid-client` by clicking on menu `Packages & Apps`
+3. Install the npm package [openid-client](https://www.npmjs.com/package/openid-client) by clicking on menu `Packages & Apps`
 
     ![openid-client](./images/openid-client.png)
 
@@ -290,10 +290,16 @@ Login Page
 ![login](./images/login.png)
 Signup Page
 ![signup](./images/signup.png)
+Login Button on Home Page
+![login-home](./images/login-home.png)
 Consent Screen
-![consent-screen.](./images/consent-screen.png)
+![consent-screen](./images/consent-screen.png)
+Affinidi LoggedIn page
+![loading-page](./images/loading-page.png)
 Accounts page post login Success
 ![login-success](./images/login-success.png)
+
+
 
 
 
