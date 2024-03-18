@@ -288,14 +288,19 @@ $w.onReady(function () {
 
 Login Page
 ![login](./images/login.png)
+
 Signup Page
 ![signup](./images/signup.png)
+
 Login Button on Home Page
 ![login-home](./images/login-home.png)
+
 Consent Screen
 ![consent-screen](./images/consent-screen.png)
+
 Affinidi LoggedIn page
 ![loading-page](./images/loading-page.png)
+
 Accounts page post login Success
 ![login-success](./images/login-success.png)
 
