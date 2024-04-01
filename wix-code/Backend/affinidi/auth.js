@@ -42,6 +42,14 @@ const getClient = async (baseUrl) => {
 
 export const getAuthUrl = async (baseUrl) => {
 
+    /* 
+    TODO : Remove hard-coding of options.code_verifier
+
+    To enhance the security of the authorization process, it is recommended to generate a `code_verifier` dynamically for each authentication request, rather than using a hardcoded value stored in the secret manager. This generated code should be a random alphanumeric string using `generators.codeVerifier()`. After generation, the code_verifier should be stored in a database using [Wix-data](https://www.wix.com/velo/reference/wix-data/insert) APIs. Subsequently, this verifier can be retrieved and verified during the authorization code exchange flow, ensuring that each authorization request is both unique and secure.
+
+    */
+
+
     const options = await getSSOSettings(baseUrl);
     const state = generators.state();
     const params = {

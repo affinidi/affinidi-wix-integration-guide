@@ -134,6 +134,9 @@ Sample value should look like:
     "code_verifier": "affinidissoabc-klDgGJkAEho7OMAu1qG02LKlFEfPWJztMaq2Lb7b8hI"
 }
 ```
+
+**Note**: To enhance the security of the authorization process, it is recommended to generate a `code_verifier` dynamically for each authentication request, rather than using a hardcoded value stored in the secret manager. This generated code should be a random alphanumeric string. After generation, the code_verifier should be stored in a database using [Wix-data](https://www.wix.com/velo/reference/wix-data/insert) APIs. Subsequently, this verifier can be retrieved and verified during the authorization code exchange flow, ensuring that each authorization request is both unique and secure.
+
 ![store-secret](./images/store-secret.png)
 
 
